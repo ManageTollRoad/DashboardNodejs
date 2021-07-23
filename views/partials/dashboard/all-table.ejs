@@ -1,0 +1,17 @@
+<tbody>
+    <% Object.keys(vehicles).flatMap((key) => vehicles[key]).forEach((vehicle) => { %>
+        <% 
+            const type = VEHICLES_TYPES[vehicle.vehicleType] || VEHICLES_TYPES['default'];
+            const icon = type.icon;
+            const color = type.colorHex;
+        %>
+        <tr>
+            <td><%= vehicle.vehicleId %></td>
+            <td><i class="material-icons"><%= icon %></i></td>
+            <td><%= capitalize(vehicle.type) %></td>
+            <td><%= vehicle.dayOfWeek %></td>
+            <td><%= vehicle.hour %></td>
+            <td><%= capitalize(vehicle.dayType) %></td>
+        </tr>
+  <% }); %>
+</tbody>

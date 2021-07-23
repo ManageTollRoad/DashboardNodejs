@@ -1,0 +1,28 @@
+<div class="row" style="justify-content:center;">
+    <% Object.keys(vehicles).forEach(function(key) { %>
+        <% 
+            const type = VEHICLES_TYPES[key] || VEHICLES_TYPES['default'];
+            const icon = type.icon;
+            const text = type.text;
+            const color = type.color;
+        %>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-<%= color %> card-header-icon">
+                <div class="card-icon">
+                    <i class="material-icons"><%= icon %></i>
+                </div>
+                <p class="card-category"><%= text %></p>
+                <h3 class="card-title"><%= vehicles[key].length %>
+                </h3>
+                </div>
+                <div class="card-footer">
+                <div class="stats">
+                    <a href="javascript:;" data-toggle="modal" data-target="#modal<%= key %>">Show details</a>
+                </div>
+                </div>
+            </div>
+        </div>
+        <%- include('./vehicle-modal',{key,vehicles:vehicles[key]}); %>
+    <% }); %>
+  </div>

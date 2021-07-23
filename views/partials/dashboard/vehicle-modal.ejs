@@ -1,0 +1,30 @@
+<div class="modal fade" id="modal<%= key %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <% 
+        const type = VEHICLES_TYPES[key] || VEHICLES_TYPES['default'];
+        const icon = type.icon;
+        const text = type.text;
+        const color = type.color;
+    %>
+    <div class="modal-dialog bd-example-modal-lg" role="document" style="max-width: 70%;">
+        <div class="modal-content">
+            <div class="card">
+                <div class="card-header card-header-<%= color %>">
+                  <h4 class="card-title"><%= capitalize(key) %> in the road</h4>
+                </div>
+                <div class="card-body table-responsive">
+                  <table class="table table-hover">
+                    <thead class="text-<%= color %>">
+                      <th>ID</th>
+                      <th>Vehicle type</th>
+                      <th>Road action</th>
+                      <th>Day of week</th>
+                      <th>Hour</th>
+                      <th>Day type</th>
+                    </thead>
+                    <%- include('./all-table'); %>
+                  </table>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
