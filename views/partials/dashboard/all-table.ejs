@@ -1,5 +1,5 @@
 <tbody>
-    <% Object.keys(vehicles).flatMap((key) => vehicles[key]).forEach((vehicle) => { %>
+    <% vehicles.forEach((vehicle) => { %>
         <% 
             const type = VEHICLES_TYPES[vehicle.vehicleType] || VEHICLES_TYPES['default'];
             const icon = type.icon;

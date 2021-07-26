@@ -1,9 +1,6 @@
 var express = require('express');
 const redisService = require('../services/redisClientSdk');
 var router = express.Router();
-var loadash = require('lodash');
-const socket = require('../app');
-
 /* GET home page. */
 router.get('/', async function (req, res, next) {
   //TODO: get from redis all vehicles'
@@ -24,8 +21,7 @@ router.get('/', async function (req, res, next) {
         const key = await redisService.get(value);
         return Promise.resolve(JSON.parse(key));
       }));
-      const groupby = loadash.groupBy(vehicles, 'vehicleType');
-      res.render('pages/dashboard', { vehicles: groupby });
+      res.render('pages/dashboard', { vehicles });
     });
 
   }
