@@ -4,7 +4,7 @@ const redisService = require('../services/redisClientSdk');
 const conf = readConfFile()
 
 
-module.exports = runKafkaConsumer = () => {
+module.exports = runKafkaConsumer = (socket) => {
 
 
     const onData = async (data) => {
@@ -16,6 +16,7 @@ module.exports = runKafkaConsumer = () => {
             }
 
             // TODO: send to connected socket
+            socket.io.emit('vehicle_update', data);
         }
         catch (e) {
             console.log(e);

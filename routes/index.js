@@ -2,6 +2,7 @@ var express = require('express');
 const redisService = require('../services/redisClientSdk');
 var router = express.Router();
 var loadash = require('lodash');
+const socket = require('../app');
 
 /* GET home page. */
 router.get('/', async function (req, res, next) {
