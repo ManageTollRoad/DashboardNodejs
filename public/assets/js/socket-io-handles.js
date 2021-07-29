@@ -2,9 +2,10 @@ const indexToKeyMap = {
     0: 'id',
     1: 'vehicleType',
     2: 'type',
-    3: 'dayOfWeek',
-    4: 'hour',
-    5: 'dayType'
+    3: 'section',
+    4: 'dayOfWeek',
+    5: 'hour',
+    6: 'dayType'
 }
 
 const initVehiclesFromTable = () => {
@@ -26,8 +27,15 @@ const initVehiclesFromTable = () => {
 
 const handleVehiclesCounter = (socketData, vehicles) => {
     if (!vehicles.find(item => item.id == socketData.vehicleId)) {
-        const counter = $(`#counter-${socketData.vehicleType}`)[0];
-        $(`#counter-${socketData.vehicleType}`).html(parseInt(counter.innerText) + 1);
+        const counter = $(`#counter-${socketData.section}`)[0];
+        $(`#counter-${socketData.section}`).html(parseInt(counter.innerText) + 1);
+    }
+    else {
+        const counter = $(`#counter-${socketData.section}`)[0];
+        if (socketData.type.toLowerCase().indexOf('enter') !== -1)
+            $(`#counter-${socketData.section}`).html(parseInt(counter.innerText) + 1);
+        else if (socketData.type.toLowerCase().indexOf('exit') !== -1 && parseInt(counter.innerText) > 0)
+            $(`#counter-${socketData.section}`).html(parseInt(counter.innerText) - 1);
     }
 }
 const handleAllTableVehicles = (vehicle) => {
@@ -46,7 +54,8 @@ const appendTable = (vehicle, tableId) => {
             if (key === 'vehicleType')
                 $(vehicleRow).find("td").eq(index).html(`<i class="material-icons">${icon}</i>`);
             else {
-                $(vehicleRow).find("td").eq(index).html(vehicle[key]?.capitalize());
+                const value = vehicle[key]?.capitalize ? vehicle[key]?.capitalize() : vehicle[key];
+                $(vehicleRow).find("td").eq(index).html(value);
             }
         });
     }

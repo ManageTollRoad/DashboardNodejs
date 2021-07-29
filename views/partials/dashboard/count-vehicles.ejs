@@ -1,21 +1,28 @@
 <div class="row" style="justify-content:center;">
     <% 
-        const groupby = _.groupBy(vehicles, 'vehicleType');
-        Object.keys(groupby).forEach(function(key) {
-            const type = VEHICLES_TYPES[key] || VEHICLES_TYPES['default'];
+        const groupby = _.groupBy(vehicles, 'section');
+        ['1','2','3','4','5'].forEach(function(key) {
+            const type = SECTIONS[key] || SECTIONS['default'];
             const icon = type.icon;
-            const text = type.text;
-            const color = type.color;
+            const text = `Section #${key}`;
+            <!-- const color = type.color; -->
         %>
-        <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="card card-stats">
-                <div class="card-header card-header-<%= color %> card-header-icon">
-                <div class="card-icon">
+                <div class="card-header card-header-danger card-header-icon">
+                <div class="card-icon" 
+                style="display:flex;align-items:center;flex-direction:row;justify-content: center;float: inherit;
+                width: 60%;
+                margin-right: auto;
+                margin-left: auto;background: linear-gradient(
+90deg
+, rgba(47,238,181,1) 0%, rgba(0,212,255,1) 100%);">
+                    <span>SECTION</span>
                     <i class="material-icons"><%= icon %></i>
                 </div>
-                <p class="card-category"><%= text %></p>
-                <h3 id="counter-<%= key %>" class="card-title"><%= groupby[key].length %>
-                </h3>
+                <!-- <p class="card-category"><%= text %></p> -->
+                <h4 class="card-title" style="text-align: center;font-weight:bold;transition: all 0.2s ease;"><span id="counter-<%= key %>"><%= groupby[key]?.filter(item => item.type.toLowerCase().indexOf('enter') !== -1).length || 0 %></span><span> Vehicles inside</span>
+                </h4>
                 </div>
                 <div class="card-footer">
                 <div class="stats">
@@ -24,6 +31,6 @@
                 </div>
             </div>
         </div>
-        <%- include('./vehicle-modal',{key,vehicles:groupby[key]}); %>
+        <%- include('./vehicle-modal',{key,vehicles:groupby[key] || []}); %>
     <% }); %>
   </div>

@@ -1,5 +1,25 @@
 const _ = require("lodash");
 module.exports = {
+    SECTIONS: {
+        1: {
+            icon: 'looks_one'
+        },
+        2: {
+            icon: 'looks_two'
+        },
+        3: {
+            icon: 'looks_3'
+        },
+        4: {
+            icon: 'looks_4'
+        },
+        5: {
+            icon: 'looks_5'
+        },
+        default: {
+            icon: 'looks_zero'
+        },
+    },
     VEHICLES_TYPES: {
         private: {
             color: 'warning',
