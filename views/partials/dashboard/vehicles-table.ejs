@@ -32,7 +32,22 @@
               <h4 class="card-title">BigML data</h4>
             </div>
           <div class="card-body table-responsive" style="overflow: auto;max-height: 591px;">
-            
+            <table class="table table-hover" id="confusion-matrix">
+                <tbody>
+                  <% matrix.forEach((row,rowIndex) => { %>
+                    <tr id="tr-<%= rowIndex %>">
+                      <% row.forEach((cell,cellIndex) => { %>
+                        <%
+                          const isFirst = rowIndex === 0 && cellIndex === 0;
+                          const colored = (rowIndex === 0 || cellIndex === 0) && 'background: #fff4f0;';
+                        %>
+                        <td id="td-<%= rowIndex %>_<%= cellIndex %>" style="<%= colored %>"><%= !isFirst ? cell : '' %></td>
+                      <% }); %>
+                    </tr>
+                  <% }); %>
+                </tbody>
+            </table>
+            <p style="font-size:18px;font-weight:bold;">Accuracy: <span id="confusion-matrix-acc"><%= matrixAccuracy %></span></p>
           </div>
         </div>
       </div>

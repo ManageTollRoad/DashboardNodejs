@@ -16,9 +16,6 @@ module.exports = {
         5: {
             icon: 'looks_5'
         },
-        default: {
-            icon: 'looks_zero'
-        },
     },
     VEHICLES_TYPES: {
         private: {

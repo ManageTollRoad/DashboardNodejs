@@ -1,8 +1,8 @@
 <div class="row" style="justify-content:center;">
     <% 
         const groupby = _.groupBy(vehicles, 'section');
-        ['1','2','3','4','5'].forEach(function(key) {
-            const type = SECTIONS[key] || SECTIONS['default'];
+        Object.keys(SECTIONS).forEach(function(key) {
+            const type = SECTIONS[key] || {};
             const icon = type.icon;
             const text = `Section #${key}`;
             <!-- const color = type.color; -->

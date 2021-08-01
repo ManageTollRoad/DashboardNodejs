@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="../public/assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../public/assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="../public/assets/img/favicon.ico">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
     ManageTollRoll
@@ -36,14 +36,12 @@
   </style>
 </head>
 
-<body class="">
+<body class="" style="background: #ededed;background-image: url(https://preview.pixlr.com/images/450nwm/1144/2/1144101839.jpg);
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;">
   <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="white" data-image="../public/assets/img/sidebar-1.jpg">
-      <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
-        Tip 2: you can also add an image using data-image tag
-    -->
+    <!-- <div class="sidebar" data-color="purple" data-background-color="white" data-image="../public/assets/img/sidebar-1.jpg">
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item active  ">
@@ -54,8 +52,8 @@
           </li>
         </ul>
       </div>
-    </div>
-    <div class="main-panel">
+    </div> -->
+    <div class="main-panel" style="float: inherit;width: 100%;">
       <!-- Navbar -->
       <!-- <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
@@ -65,7 +63,17 @@
         </div>
       </nav> -->
       <!-- End Navbar -->
-      <div class="content" style="margin-top:40px;">
+      <div><h1 style="    color: white;
+      text-align: center;
+      margin-top: 20px;
+      padding: 10px;
+      ">Road Dashboard</h1>
+      <div style="width: 300px;
+      height: 5px;
+      background: white;
+      margin: auto;"></div>
+      </div>
+      <div class="content" style="margin-top:10px;">
         <div class="container-fluid">
           <%- include('../partials/dashboard/count-vehicles'); %>
 
@@ -301,10 +309,13 @@
       // md.initDashboardPageCharts();
       var socket = io();
       socket.on('vehicle_update',(data)=>{
+        console.log(data);
         const vehicles = initVehiclesFromTable();
-        handleAllTableVehicles(data);
-        handleVehicleTypeTable(data);
-        handleVehiclesCounter(data,vehicles)
+        handleAllTableVehicles(data.vehicle);
+        handleVehicleTypeTable(data.vehicle);
+        handleVehiclesCounter(data.vehicle,vehicles);
+        if(data.matrix)
+          handleMatrixConfusion(data.matrix,data.matrixAccuracy);
       });
     });
   </script>

@@ -70,3 +70,14 @@ const appendTable = (vehicle, tableId) => {
         </tr>`);
     }
 }
+
+const handleMatrixConfusion = (matrix, accuracy) => {
+    matrix.forEach((row, rowIndex) => {
+        row.forEach((cell, cellIndex) => {
+            const td = $(`#confusion-matrix tbody #td-${rowIndex}_${cellIndex}`)[0]
+            if (td && rowIndex != 0 && cellIndex != 0) $(td).html(cell);
+        });
+    });
+    if (accuracy)
+        $('#confusion-matrix-acc').html(accuracy);
+}

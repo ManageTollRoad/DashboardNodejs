@@ -1,4 +1,5 @@
 var express = require('express');
+const { calcMatrixAcc } = require('../handlers/util');
 const redisService = require('../services/redisClientSdk');
 var router = express.Router();
 /* GET home page. */
@@ -21,7 +22,9 @@ router.get('/', async function (req, res, next) {
         const key = await redisService.get(value);
         return Promise.resolve(JSON.parse(key));
       }));
-      res.render('pages/dashboard', { vehicles });
+      const matrixJSON = await redisService.get('confusion-matrix');
+      const matrix = JSON.parse(matrixJSON);
+      res.render('pages/dashboard', { vehicles, matrix, matrixAccuracy: calcMatrixAcc(matrix) });
     });
 
   }

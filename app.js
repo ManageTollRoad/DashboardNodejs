@@ -16,11 +16,12 @@ var initKafkaConsumer = require('./handlers/kafkaHandlerConsumer');
 var indexRouter = require('./routes/index');
 var locals = require('./handlers/locals');
 const SocketIOSDK = require('./services/socketIoSdk');
-require('./services/redisClientSdk');
+const redisService = require('./services/redisClientSdk');
 
 var socket = new SocketIOSDK(server);
 
 initKafkaConsumer(socket);
+// initConfusionMatrix();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -58,6 +59,18 @@ console.log('server is listening on port: ', port);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+function initConfusionMatrix() {
+  const matrix = [
+    [0, 1, 2, 3, 4, 5],
+    [1, 0, 0, 0, 0, 0],
+    [2, 0, 0, 0, 0, 0],
+    [3, 0, 0, 0, 0, 0],
+    [4, 0, 0, 0, 0, 0],
+    [5, 0, 0, 0, 0, 0]
+  ]
+  redisService.set('confusion-matrix', JSON.stringify(matrix));
+}
 
 function normalizePort(val) {
   var port = parseInt(val, 10);
