@@ -309,7 +309,6 @@ background-size: cover;">
       // md.initDashboardPageCharts();
       var socket = io();
       socket.on('vehicle_update',(data)=>{
-        console.log(data);
         const vehicles = initVehiclesFromTable();
         handleAllTableVehicles(data.vehicle);
         handleVehicleTypeTable(data.vehicle);

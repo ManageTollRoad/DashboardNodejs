@@ -29,7 +29,7 @@ module.exports = runKafkaConsumer = (socket) => {
                 const response = await redisService.get(`predict-exit-${data.vehicleId}`);
                 const matrixJSON = await redisService.get('confusion-matrix');
                 matrix = [...JSON.parse(matrixJSON)];
-                if (response) {
+                if (response && matrix) {
                     matrix[Number(data.section)][Number(response)]++;
                     await redisService.set('confusion-matrix', JSON.stringify(matrix));
                 }

@@ -28,10 +28,12 @@ const initVehiclesFromTable = () => {
 const handleVehiclesCounter = (socketData, vehicles) => {
     if (!vehicles.find(item => item.id == socketData.vehicleId)) {
         const counter = $(`#counter-${socketData.section}`)[0];
+        if (counter === undefined) return;
         $(`#counter-${socketData.section}`).html(parseInt(counter.innerText) + 1);
     }
     else {
         const counter = $(`#counter-${socketData.section}`)[0];
+        if (counter === undefined) return;
         if (socketData.type.toLowerCase().indexOf('enter') !== -1)
             $(`#counter-${socketData.section}`).html(parseInt(counter.innerText) + 1);
         else if (socketData.type.toLowerCase().indexOf('exit') !== -1 && parseInt(counter.innerText) > 0)
